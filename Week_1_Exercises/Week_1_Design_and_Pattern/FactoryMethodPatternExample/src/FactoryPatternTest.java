@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class FactoryPatternTest {
+    //@SuppressWarnings("resource")
+	public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter document type (word/pdf/excel):");
+        String type = scanner.nextLine();
+
+        DocumentFactory factory;
+        switch (type.toLowerCase()) {
+            case "word":
+                factory = new WordDocumentFactory();
+                break;
+            case "pdf":
+                factory = new PdfDocumentFactory();
+                break;
+            case "excel":
+                factory = new ExcelDocumentFactory();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown document type");
+        }
+
+        Document document = factory.createDocument();
+        document.open();
+
+        scanner.close();
+    }
+}

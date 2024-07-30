@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class BuilderPattern {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Enter CPU:");
+        String CPU = scanner.nextLine();
+        
+        System.out.println("Enter RAM:");
+        String RAM = scanner.nextLine();
+        
+        System.out.println("Enter storage:");
+        String storage = scanner.nextLine();
+        
+        Computer computer = new Computer.Builder()
+                .setCPU(CPU)
+                .setRAM(RAM)
+                .setStorage(storage)
+                .build();
+        
+        System.out.println(computer);
+
+        scanner.close();
+    }
+}

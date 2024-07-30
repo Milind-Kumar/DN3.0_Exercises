@@ -1,0 +1,71 @@
+public class OrderSorting {
+    public static void bubbleSort(Order[] orders) {
+        int n = orders.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (orders[j].getTotalPrice() > orders[j + 1].getTotalPrice()) {
+                    Order temp = orders[j];
+                    orders[j] = orders[j + 1];
+                    orders[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void quickSort(Order[] orders, int low, int high) {
+        if (low < high) {
+            int pi = partition(orders, low, high);
+            quickSort(orders, low, pi - 1);
+            quickSort(orders, pi + 1, high);
+        }
+    }
+
+    private static int partition(Order[] orders, int low, int high) {
+        double pivot = orders[high].getTotalPrice();
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (orders[j].getTotalPrice() < pivot) {
+                i++;
+                Order temp = orders[i];
+                orders[i] = orders[j];
+                orders[j] = temp;
+            }
+        }
+        Order temp = orders[i + 1];
+        orders[i + 1] = orders[high];
+        orders[high] = temp;
+
+        return i + 1;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Order[] orders = new Order[3];
+
+        for (int i = 0; i < orders.length; i++) {
+            System.out.println("Enter details for order " + (i + 1) + ":");
+            System.out.print("Order ID: ");
+            String orderId = scanner.nextLine();
+            System.out.print("Customer Name: ");
+            String customerName = scanner.nextLine();
+            System.out.print("Total Price: ");
+            double totalPrice = scanner.nextDouble();
+            scanner.nextLine();  // Consume newline
+            orders[i] = new Order(orderId, customerName, totalPrice);
+        }
+
+        System.out.println("Orders sorted using Bubble Sort:");
+        bubbleSort(orders);
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+
+        System.out.println("Orders sorted using Quick Sort:");
+        quickSort(orders, 0, orders.length - 1);
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+
+        scanner.close();
+    }
+}
