@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+F:\DN3.0_Exercises\Week_2_Exercises\Week 2_Spring_Core_Maven\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
